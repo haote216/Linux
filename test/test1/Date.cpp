@@ -31,6 +31,12 @@ Date::Date(int year, int month, int day)
 	}
 	
 }
+Date::Date(const Date& d)
+{
+    _year = d._year;
+    _month = d._month;
+    _day = d._day;
+ }
 Date& Date::operator=(const Date& d)
 {
 	if (this != &d)
@@ -96,7 +102,7 @@ Date Date::operator+(int day)
 		ret._month++;
 		if (ret._month > 13)
 		{
-			ret._year += 1;
+        	ret._year += 1;
 			ret._month = 1;
 		}
 	}
@@ -164,7 +170,7 @@ int Date::operator-(const Date& d)
 		Date tmp;
 		tmp = tmp2;
 		tmp2 = tmp1;
-		tmp1 = tmp;
+        tmp1 = tmp;
 	}
 	while (tmp1 != tmp2)
 	{
@@ -175,10 +181,10 @@ int Date::operator-(const Date& d)
 }
 Date Date::operator++()  //后置++
 {
-	Date ret(*this);
-	*this += 1;
-	return ret;
-}
+    Date ret(*this);
+    *this += 1; 
+    return ret; 
+} 
 Date Date::operator++(int)  //前置++
 {
 	*this += 1;
