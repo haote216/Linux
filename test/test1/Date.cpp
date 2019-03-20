@@ -3,7 +3,7 @@
 int Date::GetMonthDay(int year, int month)
 {
 	static const int monthDay[13] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-	if ((month == 2) && (year % 4 == 0 && year % 100 != 0 )|| (year % 400 == 0))
+	if ((month == 2) && ((year % 4 == 0 && year % 100 != 0 )|| (year % 400 == 0)))
 	{
 		return 29;
 	}
@@ -28,8 +28,7 @@ Date::Date(int year, int month, int day)
 	{
 		//assert(false);
 		cout << "Date invalid" << endl;
-	}
-	
+	}	
 }
 Date::Date(const Date& d)
 {
@@ -115,7 +114,7 @@ Date& Date::operator+=(int day)
 	{
 		this->_day -= GetMonthDay(this->_year, this->_month);
 		this->_month++;
-		if (this->_month > 13)
+		if (this->_month > 12)
 		{
 			this->_year += 1;
 			this->_month = 1;
@@ -172,31 +171,31 @@ int Date::operator-(const Date& d)
 		tmp2 = tmp1;
         tmp1 = tmp;
 	}
-	while (tmp1 != tmp2)
-	{
-		tmp2++;
-		count++;
-	}
+	while(tmp1 != tmp2)
+    {
+        ++tmp2;
+        ++count;
+    }
 	return count;
 }
-Date Date::operator++()  //后置++
+Date Date::operator++(int)  //后置++
 {
     Date ret(*this);
     *this += 1; 
     return ret; 
 } 
-Date Date::operator++(int)  //前置++
+Date Date::operator++()  //前置++
 {
 	*this += 1;
 	return *this;
 }
-Date Date::operator--()  //后置--
+Date Date::operator--(int)  //后置--
 {
 	Date ret(*this);
 	*this -= 1;
 	return ret;
 }
-Date Date::operator--(int)  //前置--
+Date Date::operator--()  //前置--
 {
 	*this -= 1;
 	return *this;
