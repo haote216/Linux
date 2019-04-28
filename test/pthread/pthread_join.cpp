@@ -11,14 +11,15 @@ struct thrd {
     char str[256];
 };
 
-void *tfn(void *arg)
+void *tfn(void *arg )
 {
     struct thrd *tval;
 
     tval =(thrd *)malloc(sizeof(tval));
 
-    tval->var = 100;
+    tval->var = 110;
     strcpy(tval->str, "hello thread");
+    return (void *)tval;
 }
 
 int main()
@@ -34,7 +35,7 @@ int main()
     if(ret != 0)
         printf("pthread_join error");
 
-    printf("child thread exit with var = %d, str = %s\n",retval->var, retval->str);
+    printf("child pthread exit with var = %d, str = %s\n",retval->var, retval->str);
     pthread_exit(NULL);
     return 0;
 }
